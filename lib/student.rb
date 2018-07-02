@@ -22,6 +22,7 @@ class Student
     tester = DB[:conn].execute(sql, name).map do |row|
       self.new_from_db(row)
     end.first
+    binding.pry
   end
 
   def self.all
