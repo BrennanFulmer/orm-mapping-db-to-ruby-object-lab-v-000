@@ -1,4 +1,4 @@
-# require 'pry'
+require 'pry'
 
 class Student
   attr_accessor :id, :name, :grade
@@ -19,7 +19,9 @@ class Student
       LIMIT 1
     SQL
     
-    DB[:conn].execute(sql, name)
+    DB[:conn].execute(sql, name).map do |row|
+      self.new_from_db(row)
+    end.first
   end
 
   def self.all
